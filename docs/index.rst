@@ -2,11 +2,10 @@ Welcome to fasttext-server's documentation!
 ===========================================
 
 .. toctree::
-:maxdepth: 2
-       :caption: Contents:
+:caption: Contents:
+       :maxdepth: 2
 
-           api
-
+       api
 
 
 Indices and tables
@@ -15,3 +14,4 @@ Indices and tables
 * :ref:`genindex`
 * :ref:`modindex`
 * :ref:`search`
+

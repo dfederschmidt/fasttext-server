@@ -58,7 +58,15 @@ def index():
 
 @app.route("/words")
 def words():
-    """Retrieve all words used for training the deployed model and their respective frequencies."""
+    """
+      Get dictionary used for model training.
+
+      Query String:
+         * freq (bool):  Whether or not to return frequencies (default: False)
+
+      Returns:
+          A json array containing words and optionally their frequencies.
+    """
     freq = bool(request.args.get('freq')) if request.args.get('freq') == "True" else False
 
     words, counts = g.ft_model.get_words(freq)
@@ -67,26 +75,63 @@ def words():
     return jsonify(res)
 
 
-@app.route("/predictions", methods=["GET", "POST"])
+@app.route("/predictions", methods=["GET"], endpoint="get_predictions")
 def predictions():
-    """Retrieve predictions from the deployed model."""
+    """
+       Retrieve predictions for a single word or sentence from the deployed model.
+
+       Query String:
+          * q (str):  word or sentence to get a vector representation for.
+          * k (int):  Number of most likely classes returned (default: 1)
+          * threshold (float): Filter classes with a probability below threshold (default: 0.0)
+
+       Returns:
+           A json containing the vector representations.
+    """
+
     k = int(request.args.get('k')) if request.args.get('k') else 1
     threshold = float(request.args.get('threshold')) if request.args.get('threshold') else 0.0
 
-    if request.method == "GET":
-        query = request.args.get('q')
-        res = make_prediction(query, k, threshold)
+    query = request.args.get('q')
+    res = make_prediction(query, k, threshold)
 
-    if request.method == "POST":
-        queries = json.loads(request.data)
-        res = [make_prediction(el, k, threshold) for el in queries]
+    return jsonify(res)
+
+
+@app.route("/predictions", methods=["POST"], endpoint="post_predictions")
+def predictions():
+    """
+       Retrieve predictions for words or sentences from the deployed model.
+
+       Query String:
+          * k (int):  Number of most likely classes returned (default: 1)
+          * threshold (float): Filter classes with a probability below threshold (default: 0.0)
+       Body:
+          A json array of strings to get classifications.
+
+       Returns:
+           A json array containing the vector representations.
+       """
+    k = int(request.args.get('k')) if request.args.get('k') else 1
+    threshold = float(request.args.get('threshold')) if request.args.get('threshold') else 0.0
+
+    queries = json.loads(request.data)
+    res = [make_prediction(el, k, threshold) for el in queries]
 
     return jsonify(res)
 
 
 @app.route("/representations", methods=["GET"], endpoint="get_representations")
 def representations():
-    """Retrieve vector representations for a single word or sentence from the deployed model."""
+    """
+    Retrieve vector representations for a single word or sentence from the deployed model.
+
+    Query String:
+       q (str):  word or sentence to get a vector representation for.
+
+    Returns:
+        A json containing the vector representation and it's dimensionality.
+    """
     query = request.args.get('q')
     res = retrieve_representation(query)
 
@@ -95,8 +140,15 @@ def representations():
 
 @app.route("/representations", methods=["POST"], endpoint="post_representations")
 def representations():
-    """Retrieve vector representations for many words and sentences from the deployed model."""
+    """
+       Retrieve vector representations for a single word or sentence from the deployed model.
 
+       Body:
+          A json array of strings.
+
+       Returns:
+           A json array containing the vector representations.
+       """
     queries = json.loads(request.data)
     res = [retrieve_representation(el) for el in queries]
 

@@ -9,6 +9,7 @@ name = "pypi"
 
 flask = "*"
 sphinx-rtd-theme = "*"
+marshmallow = "*"
 
 
 [dev-packages]
@@ -18,3 +19,8 @@ sphinx-rtd-theme = "*"
 [requires]
 
 python_version = "3.6"
+
+
+[pipenv]
+
+allow_prereleases = true

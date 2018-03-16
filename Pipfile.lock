@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "b17600196616f74d5b70c51649e3a9223a052b81935ed417a826a99fb53c0456"
+            "sha256": "7b66bfe371dda80811240dde4f411493293299ae30b4c8bafaebcc4d159a8abc"
         },
         "host-environment-markers": {
             "implementation_name": "cpython",
@@ -62,12 +62,19 @@
             ],
             "version": "==1.0"
         },
+        "marshmallow": {
+            "hashes": [
+                "sha256:0d049fdce4a3eecd91261188befeaeb937e1977fae6dbb86279b3eec8cb7feeb",
+                "sha256:dac05fc434aa21ba46e7a7d468c844c899e44f42380fba04dd896253fd7d7d52"
+            ],
+            "version": "==3.0.0b7"
+        },
         "sphinx-rtd-theme": {
             "hashes": [
-                "sha256:62ee4752716e698bad7de8a18906f42d33664128eea06c46b718fc7fbd1a9f5c",
-                "sha256:2df74b8ff6fae6965c527e97cca6c6c944886aae474b490e17f92adfbe843417"
+                "sha256:efdb06dd22d86f218dcc1e080a5fa27dc11836d3a644438842e68d561a9fcdff",
+                "sha256:18004a41a59640bda179211607e5c4910c1689306185005d1b173c129d092e3f"
             ],
-            "version": "==0.2.4"
+            "version": "==0.2.5b2"
         },
         "werkzeug": {
             "hashes": [
