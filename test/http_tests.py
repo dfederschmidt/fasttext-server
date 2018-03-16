@@ -1,6 +1,6 @@
 import unittest
 
-from app import app
+from ft_server.server import app
 
 
 class HttpTests(unittest.TestCase):
@@ -23,20 +23,14 @@ class HttpTests(unittest.TestCase):
         self.app = app.test_client()
         self.app.testing = True
 
-        # clean up logic
 
-    # code that is executed after each test
     def tearDown(self):
         pass
-
-    # test method
-    def test_equal_numbers(self):
-        self.assertEqual(2, 2)
 
     def test_index(self):
         result = self.app.get('/')
 
-        self.assertEqual('Hello World!', result.data.decode("utf-8"))
+        self.assertEqual(result.status_code, 200)
 
 
 if __name__ == '__main__':
