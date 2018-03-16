@@ -1,0 +1,17 @@
+language: python
+
+python:
+  - "3.6"
+
+env:
+  - FT_SERVER_ENV=test
+
+install:
+  - pip install pipenv
+  - pipenv install --dev
+  - pip install .
+  - git clone https://github.com/facebookresearch/fastText.git && cd fastText && pip install . && cd ..
+  - mkdir models && cd models && curl https://s3-us-west-1.amazonaws.com/fasttext-vectors/supervised_models/lid.176.ftz -o lid.176.ftz && cd ..
+
+script:
+  - python -m unittest test.http_tests

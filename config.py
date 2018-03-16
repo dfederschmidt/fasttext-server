@@ -12,7 +12,7 @@ class DevelopmentConfig(Config):
 
 class TestConfig(Config):
     DEBUG = True
-    FT_SERVER_MODEL_PATH = "../models/lid.176.bin"
+    FT_SERVER_MODEL_PATH = "./models/lid.176.ftz"
 
 
 class DockerConfig(Config):
