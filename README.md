@@ -1,6 +1,7 @@
 # fasttext-server
 
 ![travis](https://travis-ci.org/dfederschmidt/fasttext-server.svg?branch=master)
+[![Docker Automated build](https://img.shields.io/docker/automated/jrottenberg/ffmpeg.svg)](https://hub.docker.com/r/dfederschmidt/fasttext-server)
 
 Deploy your [FastText](https://fasttext.cc/) models as a [RESTful](https://en.wikipedia.org/wiki/Representational_state_transfer) [Microservice](https://www.martinfowler.com/articles/microservices.html) with ease.
 
