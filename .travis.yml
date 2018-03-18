@@ -1,16 +1,27 @@
 language: python
-
+sudo: required
 python:
-  - "3.6"
-
+- '3.6'
 env:
+  matrix:
   - FT_SERVER_ENV=test
+  global:
+    secure: 0KhemH29yanZhCLAdPGpQyZHrpskdxgt/5N8315GkxKrR12aKf9iZRJXF8GvIhx4MPd+HDGV4SaWBkvkJwZJo/UvK7iwD8h9P1ArDCQ1n9NPnIctFK36HQ4voUwNG3eOxYqRbg5Rr0sym5qMw75DeehK3sGYkkPPlJC+27zl4dWWH6RxXunPyxAQfs/YJYNadjFiBf9bCDKreOvRPjrV/V3x6lM75rmj7vr6lDix+G1N189z6kH5lA+1ElyQmGlXpn+WjZYXObDVbM3p1O4FiJ7LB6+fiBogLzR6MlbMVtKSgn0X/FOVmRA+LcysPO8Qxc2ruq4WuIiQPxpJKnn98ZJ0sBNWot/KSlgZtw89MSba24QxWeiw8XUk2ZO54ZMyVitxio1zEXpr1ycrNuQ384dIkgAt55q/touAspJvjk0DUz/cnUOI6n85ykkjbL1VcaUkAPZPKMOAnVKvY7poIxyQmtrxjVEofpufAerbptNbzJy5cv25dPQN07vaCanUuCr8ciBQ3plEzXUYHr8xvboNnkkaQtpL0XfnfTn5VX1pRQMaNaKNqjiiMAZUA8RP4oYEXXk7d8HiyKMNilj6hV1/aFoCOOaBg3bzd7qpEnyTbVamd890F+6FYNlFoi3THye0OPjxdqTc07pukFco/GtV4Gkj8V5W16E+j/4hRUc=
 
 install:
-  - pip install pipenv
-  - pipenv install --dev
-  - pip install .
-  - mkdir models && cd models && curl https://s3-us-west-1.amazonaws.com/fasttext-vectors/supervised_models/lid.176.ftz -o lid.176.ftz && cd ..
+- pip install pipenv
+- pipenv install --dev
+- pip install .
+- mkdir models && cd models && curl https://s3-us-west-1.amazonaws.com/fasttext-vectors/supervised_models/lid.176.ftz
+  -o lid.176.ftz && cd ..
 
 script:
-  - python -m unittest test.http_tests
+- python -m unittest test.http_tests
+
+after_success:
+- docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
+- docker build -t dfederschmidt/fasttext-server .
+- docker push dfederschmidt/fasttext-server
+
+services:
+- docker
