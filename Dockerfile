@@ -8,7 +8,4 @@ WORKDIR /app
 RUN pip install pipenv
 RUN pipenv install --system
 
-RUN git clone https://github.com/facebookresearch/fastText.git
-RUN pip install ./fastText
-
 CMD ["python", "app.py"]

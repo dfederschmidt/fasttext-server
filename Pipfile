@@ -8,11 +8,10 @@ name = "pypi"
 [packages]
 
 flask = "*"
-sphinx-rtd-theme = "*"
-marshmallow = "*"
-
+fastText = {git = "https://github.com/facebookresearch/fastText"}
 
 [dev-packages]
+sphinx-rtd-theme = "*"
 
 
 
