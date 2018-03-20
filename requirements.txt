@@ -1,2 +1,2 @@
-sphinx-rtd-theme = "*"
-sphinxcontrib-httpdomain = "*"
+sphinx-rtd-theme
+sphinxcontrib-httpdomain

@@ -2,10 +2,15 @@ Welcome to fasttext-server's documentation!
 ===========================================
 
 .. toctree::
-:caption: Contents:
-       :maxdepth: 2
+   :maxdepth: 2
 
-       api
+
+.. warning::
+
+   Work in progress!
+
+
+   api
 
 
 Indices and tables
