@@ -19,9 +19,13 @@ script:
 - python -m unittest test.http_tests
 
 after_success:
+- export TAG=`if [ $TRAVIS_BRANCH == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH ; fi`
+- export REPO=dfederschmidt/fasttext-server
 - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
-- docker build -t dfederschmidt/fasttext-server .
-- docker push dfederschmidt/fasttext-server
+- docker build -t $REPO:$TRAVIS_COMMIT .
+- docker tag $REPO:$TRAVIS_COMMIT $REPO:$TAG
+- docker tag $REPO:$TRAVIS_COMMIT $REPO:travis-$TRAVIS_BUILD_NUMBER
+- docker push $REPO
 
 services:
 - docker

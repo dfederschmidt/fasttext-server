@@ -7,7 +7,7 @@ class Config(object):
 
 class DevelopmentConfig(Config):
     DEBUG = True
-    FT_SERVER_MODEL_PATH = "./models/lid.176.ftz"
+    FT_SERVER_MODEL_PATH = "./models/lid.176.bin"
 
 
 class TestConfig(Config):

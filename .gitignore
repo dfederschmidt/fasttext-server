@@ -2,4 +2,5 @@
 fastText/
 models/
 docs/_build/
-ft_server/__pycache__/
+ft_server/
+__pycache__/
