@@ -15,7 +15,7 @@ click = "*"
 [dev-packages]
 
 sphinx-rtd-theme = "*"
-
+sphinxcontrib-httpdomain = "*"
 
 [requires]
 
