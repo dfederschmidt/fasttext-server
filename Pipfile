@@ -13,7 +13,7 @@ click = "*"
 
 
 [dev-packages]
-
+Sphinx = "*"
 sphinx-rtd-theme = "*"
 sphinxcontrib-httpdomain = "*"
 
