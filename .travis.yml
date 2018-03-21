@@ -7,25 +7,30 @@ env:
   - FT_SERVER_ENV=test
   global:
     secure: 0KhemH29yanZhCLAdPGpQyZHrpskdxgt/5N8315GkxKrR12aKf9iZRJXF8GvIhx4MPd+HDGV4SaWBkvkJwZJo/UvK7iwD8h9P1ArDCQ1n9NPnIctFK36HQ4voUwNG3eOxYqRbg5Rr0sym5qMw75DeehK3sGYkkPPlJC+27zl4dWWH6RxXunPyxAQfs/YJYNadjFiBf9bCDKreOvRPjrV/V3x6lM75rmj7vr6lDix+G1N189z6kH5lA+1ElyQmGlXpn+WjZYXObDVbM3p1O4FiJ7LB6+fiBogLzR6MlbMVtKSgn0X/FOVmRA+LcysPO8Qxc2ruq4WuIiQPxpJKnn98ZJ0sBNWot/KSlgZtw89MSba24QxWeiw8XUk2ZO54ZMyVitxio1zEXpr1ycrNuQ384dIkgAt55q/touAspJvjk0DUz/cnUOI6n85ykkjbL1VcaUkAPZPKMOAnVKvY7poIxyQmtrxjVEofpufAerbptNbzJy5cv25dPQN07vaCanUuCr8ciBQ3plEzXUYHr8xvboNnkkaQtpL0XfnfTn5VX1pRQMaNaKNqjiiMAZUA8RP4oYEXXk7d8HiyKMNilj6hV1/aFoCOOaBg3bzd7qpEnyTbVamd890F+6FYNlFoi3THye0OPjxdqTc07pukFco/GtV4Gkj8V5W16E+j/4hRUc=
-
 install:
 - pip install pipenv
 - pipenv install --dev
 - pip install .
 - mkdir models && cd models && curl https://s3-us-west-1.amazonaws.com/fasttext-vectors/supervised_models/lid.176.ftz
   -o lid.176.ftz && cd ..
-
 script:
 - python -m unittest test.http_tests
-
 after_success:
-- export TAG=`if [ $TRAVIS_BRANCH == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH ; fi`
+- export TAG=`if [ $TRAVIS_BRANCH == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH
+  ; fi`
 - export REPO=dfederschmidt/fasttext-server
 - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
 - docker build -t $REPO:$TRAVIS_COMMIT .
 - docker tag $REPO:$TRAVIS_COMMIT $REPO:$TAG
 - docker tag $REPO:$TRAVIS_COMMIT $REPO:travis-$TRAVIS_BUILD_NUMBER
 - docker push $REPO
-
 services:
 - docker
+deploy:
+  provider: pypi
+  user:
+    secure: IgJrqjnfMW8EzB4qARzAOHzwJ2c2rw4GVM2B5eYRgioVr00NUD48e6FWXcQNu/S8GMfjTJvPJEpUrT/EnjkJx88v6jVLxObfNjmMljUwypphOwlx6cuGQDYBKJb/nfHkC9pnT/IQdChB/5QVoH19Fn5Yh6RwvgUbLUxz+P782p7RJ9HWPsOFizRY9qNgp8SErrzcQe0a6D42IiYxnebau7iDnJ/lFsOOdFR04bmsv0Y12xDEUTZGkiIOD1lT2W1GWJsXwu11FGMX8fGjUgoHu/3GmIkOS5A5mCgCtiGCOMK4HNLOFej0pjO5NJXv9l1zWaQjxa2txWexqOo/6fcH9+iQRFQO7wImtzl3XO5WwtrYcT7SNvc1VwRWhtKS9M1V/+c3TjskZikQ1t7Tgh6shcPj6khpji0P/f04A2v6TfjaLwb4F7GgxdPUz5t/MplcpFpTWLdvDMZ4S0MBTbWP98UWBX6Cw3RZVzIQh0slpE0Lf32SX3WXZVNurIWhaOpHS9YRQG1HdDmkd1/YQEbHtUc9+usuZoFojNB8Qd7E1RWH/j4KwAouOFc8DLhuhkf28/DD2NxBxg67/Xiylsu14lCgc+XyjxDONntJ64pmweF6pxoFLwoKoiUAND3kSa9ExnsWo7iCnCFKOOSUeC2B9WpoCRDvjihksO4XGHJutUM=
+  password:
+    secure: soSjt5bNJjIKpVCMB8rpSu2Merw48Y7mODhxsa8HVNcCMGp6kf1hfSEtmgrvZ4z5TwYEl49KpsbqmGY5sey4HRO4oh5TI4kogGesATOFHuQ/PUJ14xN+/CYeeosza7zCsq9/SLqYDnRM7k12VdgkRDmRmBxtBF7vf7nCrJ/uClhwm2wavDSle3YxigpyGVti8vcpfuLQllkVsx+IHt+E2ccKiSLSrf+l1p6RIlltq1ECUp60JrUMkVGGz1cnK5gLcFuZ7XMSp6a6qV/S+cAIrKcZJs6GMIaNBongz5MlhvHP7Rb1Hx0ZaVfEeOJRvbfyGAgf+c8yhOOPbnxYlC/OEmP6W7EcyR45Gr8RnW9tNJL8/13A8b5a7NrP8nBfg6/4wsTaiVJ/muH2L0e3UHSUIvzyGoiULOgtCdgTae/KwuprIkqFclWLK8uji8EQsp8p4+SZYubSwuA1ukW6rZhwmlVOtIGGW2pxUredSYnsCe/t/gBjLAtaTc/9bXvZErkYbkxyfEF/pI25QSKri8d9G6oMgQIHmIv9/BmmJWDFbTRKZlehh/AKpzeMfdz91/lSahl5LFt0lsxpdOXKispbSam7dPBLKX/UmbyK8LRJshGaQ7mVpZgUfs3lO00VHNT5kz3bvto15NxgKmVrgXWasasU5mTw8ZL7DF7MNQfOiVw=
+  on:
+    branch: master
