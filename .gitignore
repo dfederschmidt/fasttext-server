@@ -4,3 +4,4 @@ models/
 docs/_build/
 __pycache__/
 *.egg-info/
+build/

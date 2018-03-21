@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "4470180aea66f0a5f54f7aa250e0c83f9968bb9e48bc5da47cedaf8ee7baad0d"
+            "sha256": "5348c8177c9501ebae33b671fbf144a2031b7a890b4910c4547eaf5c3951bcab"
         },
         "host-environment-markers": {
             "implementation_name": "cpython",
@@ -36,8 +36,9 @@
             ],
             "version": "==6.7"
         },
-        "fasttext": {
-            "git": "https://github.com/facebookresearch/fastText"
+        "fasttext-9": {
+            "git": "https://github.com/facebookresearch/fastText.git",
+            "ref": "master"
         },
         "flask": {
             "hashes": [
@@ -200,10 +201,10 @@
         },
         "sphinx": {
             "hashes": [
-                "sha256:41ae26acc6130ccf6ed47e5cca73742b80d55a134f0ab897c479bba8d3640b8e",
-                "sha256:da987de5fcca21a4acc7f67a86a363039e67ac3e8827161e61b91deb131c0ee8"
+                "sha256:7a606d77618a753adb79e13605166e3cf6a0e5678526e044236fc1ac43650910",
+                "sha256:5a1c9a0fec678c24b9a2f5afba240c04668edb7f45c67ce2ed008996b3f21ae2"
             ],
-            "version": "==1.7.1"
+            "version": "==1.7.2"
         },
         "sphinx-rtd-theme": {
             "hashes": [
