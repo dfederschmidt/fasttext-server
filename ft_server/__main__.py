@@ -1,6 +1,6 @@
 import click
 from flask import g
-import fastText
+import fasttext
 from .server import app
 
 @click.command()
