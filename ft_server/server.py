@@ -5,7 +5,7 @@
 
 import json
 
-import fastText
+import fasttext
 import os
 from flask import Flask
 from flask import g
@@ -157,7 +157,7 @@ def representations():
 
 @app.before_request
 def before_request():
-    g.ft_model = fastText.load_model(app.config["FT_SERVER_MODEL_PATH"])
+    g.ft_model = fasttext.load_model(app.config["FT_SERVER_MODEL_PATH"])
 
 
 def retrieve_representation(q):
