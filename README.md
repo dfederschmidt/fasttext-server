@@ -1,5 +1,8 @@
 # fasttext-server
 
+**Unmaintained**: You might want to look at [fasttext-serving](https://github.com/messense/fasttext-serving).
+
+
 ![travis](https://travis-ci.org/dfederschmidt/fasttext-server.svg?branch=master)
 [![Documentation Status](https://readthedocs.org/projects/fasttext-server/badge/?version=latest)](http://fasttext-server.readthedocs.io/en/latest/?badge=latest)
 [![Docker Automated build](https://img.shields.io/docker/automated/jrottenberg/ffmpeg.svg)](https://hub.docker.com/r/dfederschmidt/fasttext-server)
